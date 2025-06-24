@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SKCMBAApplication {
 
 	public static void main(String[] args) {
+		System.out.println("aaaaaaaaaaaa");
 		SpringApplication.run(SKCMBAApplication.class, args);
 	}
 
