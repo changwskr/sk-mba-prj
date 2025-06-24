@@ -1,6 +1,5 @@
 package com.sk.mba.roianfwk.transfer;
 
-import java.math.BigDecimal;
 
 public class EPLcommonCDTO
 {
