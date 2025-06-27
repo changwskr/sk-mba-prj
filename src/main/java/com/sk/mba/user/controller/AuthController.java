@@ -31,6 +31,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> loginRequest,
                                                     HttpServletResponse response) {
+        System.out.println("AuthController.login 시작");
         System.out.println("=== AuthController.login() 호출됨 ===");
         
         String username = loginRequest.get("username");
@@ -67,6 +68,7 @@ public class AuthController {
                 result.put("username", authenticatedUser.getUsername());
                 result.put("name", authenticatedUser.getName());
                 
+                System.out.println("AuthController.login 종료");
                 return ResponseEntity.ok()
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -76,6 +78,7 @@ public class AuthController {
                 result.put("success", false);
                 result.put("message", "아이디 또는 비밀번호가 올바르지 않습니다.");
                 
+                System.out.println("AuthController.login 종료");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -86,6 +89,7 @@ public class AuthController {
             result.put("success", false);
             result.put("message", "로그인 처리 중 오류가 발생했습니다.");
             
+            System.out.println("AuthController.login 종료");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .body(result);
@@ -99,6 +103,7 @@ public class AuthController {
      */
     @PostMapping("/validate")
     public ResponseEntity<Map<String, Object>> validateToken(@RequestBody Map<String, String> tokenRequest) {
+        System.out.println("AuthController.validateToken 시작");
         System.out.println("=== AuthController.validateToken() 호출됨 ===");
         
         String token = tokenRequest.get("token");
@@ -114,6 +119,7 @@ public class AuthController {
                 result.put("username", username);
                 result.put("message", "유효한 토큰입니다.");
                 
+                System.out.println("AuthController.validateToken 종료");
                 return ResponseEntity.ok()
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -123,6 +129,7 @@ public class AuthController {
                 result.put("valid", false);
                 result.put("message", "유효하지 않은 토큰입니다.");
                 
+                System.out.println("AuthController.validateToken 종료");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -133,6 +140,7 @@ public class AuthController {
             result.put("valid", false);
             result.put("message", "토큰 검증 중 오류가 발생했습니다.");
             
+            System.out.println("AuthController.validateToken 종료");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .body(result);
@@ -146,6 +154,7 @@ public class AuthController {
      */
     @PostMapping("/logout")
     public ResponseEntity<Map<String, Object>> logout(HttpServletResponse response) {
+        System.out.println("AuthController.logout 시작");
         System.out.println("=== AuthController.logout() 호출됨 ===");
         
         // JWT 쿠키 삭제
@@ -161,6 +170,7 @@ public class AuthController {
         result.put("success", true);
         result.put("message", "로그아웃 되었습니다.");
         
+        System.out.println("AuthController.logout 종료");
         return ResponseEntity.ok()
                 .header("Content-Type", "application/json; charset=UTF-8")
                 .body(result);
@@ -174,6 +184,7 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> getCurrentUser(@RequestHeader(value = "Authorization", required = false) String authHeader,
                                                              @CookieValue(value = "jwt-token", required = false) String jwtCookie) {
+        System.out.println("AuthController.getCurrentUser 시작");
         System.out.println("=== AuthController.getCurrentUser() 호출됨 ===");
         
         Map<String, Object> result = new HashMap<>();
@@ -201,6 +212,7 @@ public class AuthController {
                 result.put("username", username);
                 result.put("name", user != null ? user.getName() : username);
                 
+                System.out.println("AuthController.getCurrentUser 종료");
                 return ResponseEntity.ok()
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -210,6 +222,7 @@ public class AuthController {
                 result.put("success", false);
                 result.put("message", "인증되지 않은 사용자입니다.");
                 
+                System.out.println("AuthController.getCurrentUser 종료");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .header("Content-Type", "application/json; charset=UTF-8")
                         .body(result);
@@ -220,6 +233,7 @@ public class AuthController {
             result.put("success", false);
             result.put("message", "사용자 정보 조회 중 오류가 발생했습니다.");
             
+            System.out.println("AuthController.getCurrentUser 종료");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .body(result);

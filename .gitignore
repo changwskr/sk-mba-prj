@@ -36,3 +36,9 @@ build/
 logs/
 *.log
 application.log
+logs/application.log
+
+### H2 Database ###
+data/
+*.db
+*.trace.db
