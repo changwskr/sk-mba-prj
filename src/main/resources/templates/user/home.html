@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>홈</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <h2>환영합니다!</h2>
+    <p>로그인한 사용자: <span th:text="${name}"></span> (<span th:text="${username}"></span>)</p>
+    
+    <div>
+        <a href="/logout">로그아웃</a>
+    </div>
+    
+    <div>
+        <h3>메뉴</h3>
+        <ul>
+            <li><a href="/roianhome">Roian Home</a></li>
+            <li><a href="/user/profile">프로필</a></li>
+        </ul>
+    </div>
+</body>
+</html> 
