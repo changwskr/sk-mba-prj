@@ -67,14 +67,18 @@ public class AuthController {
                 result.put("username", authenticatedUser.getUsername());
                 result.put("name", authenticatedUser.getName());
                 
-                return ResponseEntity.ok(result);
+                return ResponseEntity.ok()
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             } else {
                 System.out.println("인증 실패: 잘못된 사용자 정보");
                 
                 result.put("success", false);
                 result.put("message", "아이디 또는 비밀번호가 올바르지 않습니다.");
                 
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             }
         } catch (Exception e) {
             System.out.println("로그인 처리 중 오류: " + e.getMessage());
@@ -82,7 +86,9 @@ public class AuthController {
             result.put("success", false);
             result.put("message", "로그인 처리 중 오류가 발생했습니다.");
             
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .body(result);
         }
     }
     
@@ -108,14 +114,18 @@ public class AuthController {
                 result.put("username", username);
                 result.put("message", "유효한 토큰입니다.");
                 
-                return ResponseEntity.ok(result);
+                return ResponseEntity.ok()
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             } else {
                 System.out.println("토큰 검증 실패");
                 
                 result.put("valid", false);
                 result.put("message", "유효하지 않은 토큰입니다.");
                 
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             }
         } catch (Exception e) {
             System.out.println("토큰 검증 중 오류: " + e.getMessage());
@@ -123,7 +133,9 @@ public class AuthController {
             result.put("valid", false);
             result.put("message", "토큰 검증 중 오류가 발생했습니다.");
             
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .body(result);
         }
     }
     
@@ -149,7 +161,9 @@ public class AuthController {
         result.put("success", true);
         result.put("message", "로그아웃 되었습니다.");
         
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .body(result);
     }
     
     /**
@@ -187,14 +201,18 @@ public class AuthController {
                 result.put("username", username);
                 result.put("name", user != null ? user.getName() : username);
                 
-                return ResponseEntity.ok(result);
+                return ResponseEntity.ok()
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             } else {
                 System.out.println("유효한 토큰이 없음");
                 
                 result.put("success", false);
                 result.put("message", "인증되지 않은 사용자입니다.");
                 
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .header("Content-Type", "application/json; charset=UTF-8")
+                        .body(result);
             }
         } catch (Exception e) {
             System.out.println("사용자 정보 조회 중 오류: " + e.getMessage());
@@ -202,7 +220,9 @@ public class AuthController {
             result.put("success", false);
             result.put("message", "사용자 정보 조회 중 오류가 발생했습니다.");
             
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .body(result);
         }
     }
 } 
